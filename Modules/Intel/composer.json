@@ -1,0 +1,23 @@
+{
+    "name": "nwidart/intel",
+    "description": "",
+    "authors": [
+        {
+            "name": "Fox",
+            "email": "foxhand7@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Intel\\": ""
+        }
+    }
+}

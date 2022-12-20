@@ -1,0 +1,12 @@
+{
+    "name": "Intel",
+    "alias": "intel",
+    "description": "Intel Parse Module",
+    "keywords": ["IPM"],
+    "priority": 2,
+    "providers": [
+        "Modules\\Intel\\Providers\\IntelServiceProvider",
+        "Modules\\Intel\\Providers\\ParserServiceProvider"
+    ],
+    "files": []
+}

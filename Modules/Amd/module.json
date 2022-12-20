@@ -1,0 +1,11 @@
+{
+    "name": "Amd",
+    "alias": "amd",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Amd\\Providers\\AmdServiceProvider"
+    ],
+    "files": []
+}
