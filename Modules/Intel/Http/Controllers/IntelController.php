@@ -122,22 +122,22 @@ class IntelController extends Controller
                 $page = (new \Modules\Parser\Services\ParserService)->curlGetPage($elem->url_intel);
                 $html = HtmlDomParser::str_get_html($page);
 
-                foreach ($html->find('.specs-list') as $item)
+                foreach ($html->find('ul.specs-list li') as $item)
                 {
 
                     foreach ($item->find('span.label') as $element)
                     {
-                        $name = $element->text;
+                        $label = $element->text;
                     }
                     foreach ($item->find('span.value') as $element)
                     {
-                        $value = $element->text;
+                        $value = str_replace(['®', '‡', '*'],['', '', ''], $element->text);
                     }
 
                     $base = new IntelElem;
 
                     $base->intel_processors_id = $elem->id;
-                    $base->name = $name;
+                    $base->name = $label;
                     $base->value = $value;
 
                     $base->$action();
