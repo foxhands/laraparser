@@ -83,19 +83,20 @@ class IntelController extends Controller
 
     public function elementTechCreateOrUpdate($action)
     {
-        $intelElem = IntelProcessors::all()->chunk(10);
+        $techElem = IntelProcessors::all()->chunk(10);
 
-        foreach ($intelElem as $item) {
+        foreach ($techElem as $item) {
             foreach ($item as $elem){
                 $page = (new \Modules\Parser\Services\ParserService)->curlGetPage($elem->url_tech);
                 $html = HtmlDomParser::str_get_html($page);
-                foreach ($html->find('.specs-list') as $item)
+
+                foreach ($html->find('tr') as $item)
                 {
-                    foreach ($item->find('span.label') as $element)
+                    foreach ($item->find('td', 0) as $element)
                     {
                         $name = $element->text;
                     }
-                    foreach ($item->find('span.value') as $element)
+                    foreach ($item->find('td', 1) as $element)
                     {
                         $value = $element->text;
                     }
@@ -118,19 +119,20 @@ class IntelController extends Controller
 
         foreach ($intelElem as $item) {
             foreach ($item as $elem){
-                $page = (new \Modules\Parser\Services\ParserService)->curlGetPage($elem->url_tech);
+                $page = (new \Modules\Parser\Services\ParserService)->curlGetPage($elem->url_intel);
                 $html = HtmlDomParser::str_get_html($page);
+
                 foreach ($html->find('.specs-list') as $item)
                 {
-                    foreach ($item->find('li', 0) as $element)
+
+                    foreach ($item->find('span.label') as $element)
                     {
                         $name = $element->text;
                     }
-                    foreach ($item->find('li', 1) as $element)
+                    foreach ($item->find('span.value') as $element)
                     {
                         $value = $element->text;
                     }
-
 
                     $base = new IntelElem;
 
