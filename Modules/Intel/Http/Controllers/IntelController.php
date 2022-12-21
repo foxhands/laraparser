@@ -8,6 +8,7 @@ use Modules\Intel\Entities\IntelElem;
 use Modules\Intel\Entities\IntelProcessorCategory;
 use Modules\Intel\Entities\IntelProcessors;
 use Modules\Intel\Entities\TechElem;
+use Modules\Intel\Services\ParserService;
 use voku\helper\HtmlDomParser;
 
 
@@ -33,12 +34,16 @@ class IntelController extends Controller
                 $urlTech =  $baseUrlForNull.str_replace(' ', '-',$processor);
                 $urlIntel =  $baseUrl.$item->href;
 
+
                 $base = new IntelProcessors;
 
                 $base->name = $processor;
                 $base->url_intel = $urlIntel;
-                $base->url_tech =  $urlTech;
 
+                if ((new \Modules\Intel\Services\ParserService)->getUrlStatus($urlTech) == '200')
+                {
+                    $base->url_tech =  $urlTech;
+                }
 
                 $base->$action();
             }

@@ -27,5 +27,27 @@ class ParserService {
         return $response;
 
     }
+
+    public function getUrlStatus($url)
+    {
+        // Создаём дескриптор cURL
+        $ch = curl_init($url);
+
+        if($ch === false)
+            return false;
+
+        curl_setopt($ch, CURLOPT_HEADER         ,true);    // we want headers
+        curl_setopt($ch, CURLOPT_NOBODY         ,true);    // don't need body
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER ,true);    // catch output (do NOT print!)
+
+        curl_exec($ch);
+
+        if(curl_errno($ch)){   // should be 0
+            curl_close($ch);
+            return false;
+        }
+
+        return curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    }
 }
 
