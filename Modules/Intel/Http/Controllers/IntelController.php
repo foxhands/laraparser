@@ -104,7 +104,7 @@ class IntelController extends Controller
                     }
                     foreach ($item->find('td', 1) as $element)
                     {
-                        $value = str_replace(['®', '‡', '*'],['', '', ''], $element->text);
+                        $value = str_replace(['®', '‡', '*','™'],['', '', '', ''], $element->text);
                     }
 
                     $base = new TechElem;
@@ -139,7 +139,7 @@ class IntelController extends Controller
                     }
                     foreach ($item->find('span.value') as $element)
                     {
-                        $value = str_replace(['®', '‡', '*'],['', '', ''], $element->text);
+                        $value = str_replace(['®', '‡', '*','™'],['', '', '', ''], $element->text);
                     }
 
                     $base = new IntelElem;
