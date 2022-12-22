@@ -104,7 +104,7 @@ class IntelController extends Controller
                     }
                     foreach ($item->find('td', 1) as $element)
                     {
-                        $value = $element->text;
+                        $value = str_replace(['®', '‡', '*'],['', '', ''], $element->text);
                     }
 
                     $base = new TechElem;
