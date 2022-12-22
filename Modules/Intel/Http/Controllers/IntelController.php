@@ -8,6 +8,8 @@ use Modules\Intel\Entities\IntelElem;
 use Modules\Intel\Entities\IntelProcessorCategory;
 use Modules\Intel\Entities\IntelProcessors;
 use Modules\Intel\Entities\TechElem;
+use Modules\Intel\Entities\TechElemBench;
+use Modules\Intel\Entities\TechElemRating;
 use voku\helper\HtmlDomParser;
 
 
@@ -50,6 +52,7 @@ class IntelController extends Controller
     {
         $url = 'https://ark.intel.com/content/www/us/en/ark.html';
         $baseUrl = 'https://www.intel.com';
+
         $countUrl = IntelProcessorCategory::all()->count();
 
         $page = (new \Modules\Intel\Services\ParserService)->curlGetPage($url);
@@ -79,7 +82,7 @@ class IntelController extends Controller
                 $base->name = $processor;
                 $base->url = $baseUrl.$element->href;
 
-                $countUrl > 0 ? $base->save() : $base->update();
+                $countUrl > 0 ? $base->update() : $base->save();
             }
         }
     }
@@ -100,7 +103,7 @@ class IntelController extends Controller
                 {
                     foreach ($item->find('td', 0) as $element)
                     {
-                        $name = $element->text;
+                        $name = str_replace(['®', ' ‡', '‡', '*','™'],['', '', '', '', ''], $element->text);
                     }
                     foreach ($item->find('td', 1) as $element)
                     {
@@ -113,8 +116,52 @@ class IntelController extends Controller
                     $base->name = $name;
                     $base->value = $value;
 
-                    $countUrl > 0 ? $base->save() : $base->update();
+                    $countUrl > 0 ? $base->update() : $base->save();
                 }
+
+                foreach ($html->find('.tab') as $item)
+                {
+
+                    foreach ($item->find('h4') as $element)
+                    {
+                        $name = str_replace(['®', ' ‡', '‡', '*','™'],['', '', '', '', ''], $element->text);
+                    }
+                    foreach ($item->find('.avarage') as $element)
+                    {
+                        $value = str_replace(['®', '‡', '*','™'],['', '', '', ''], $element->text);
+                    }
+
+                    $base = new TechElemBench;
+
+                    $base->intel_processors_id = $elem->id;
+                    $base->name = $name;
+                    $base->value = $value;
+
+                    $countUrl > 0 ? $base->update() : $base->save();
+
+                }
+
+//                foreach ($html->find('.tab') as $item)
+//                {
+//
+//                    foreach ($item->find('h4') as $element)
+//                    {
+//                        $name = str_replace(['®', ' ‡', '‡', '*','™'],['', '', '', '', ''], $element->text);
+//                    }
+//                    foreach ($item->find('.avarage') as $element)
+//                    {
+//                        $value = str_replace(['®', '‡', '*','™'],['', '', '', ''], $element->text);
+//                    }
+//
+//                    $base = new TechElemRating();
+//
+//                    $base->intel_processors_id = $elem->id;
+//                    $base->name = $name;
+//                    $base->value = $value;
+//
+//                      $countUrl > 0 ? $base->update() : $base->save();
+//
+//                }
             }
         }
     }
@@ -135,11 +182,11 @@ class IntelController extends Controller
 
                     foreach ($item->find('span.label') as $element)
                     {
-                        $label = $element->text;
+                        $label = str_replace(['®', ' ‡', '‡', '*','™'],['', '', '', '', ''], $element->text);
                     }
                     foreach ($item->find('span.value') as $element)
                     {
-                        $value = str_replace(['®', '‡', '*','™'],['', '', '', ''], $element->text);
+                        $value = str_replace(['®', ' ‡', '‡', '*','™'],['', '', '', '', ''], $element->text);
                     }
 
                     $base = new IntelElem;
@@ -148,7 +195,7 @@ class IntelController extends Controller
                     $base->name = $label;
                     $base->value = $value;
 
-                    $countUrl > 0 ? $base->save() : $base->update();
+                    $countUrl > 0 ? $base->update() : $base->save();
                 }
             }
         }
