@@ -89,7 +89,7 @@ class IntelController extends Controller
 
     public function elementTechCreateOrUpdate()
     {
-        $countUrl = IntelProcessors::all()->count();
+        $countUrl = TechElem::all()->count();
         $techElem = IntelProcessors::all()->chunk(10);
 
 
@@ -141,27 +141,15 @@ class IntelController extends Controller
 
                 }
 
-//                foreach ($html->find('.tab') as $item)
-//                {
-//
-//                    foreach ($item->find('h4') as $element)
-//                    {
-//                        $name = str_replace(['®', ' ‡', '‡', '*','™'],['', '', '', '', ''], $element->text);
-//                    }
-//                    foreach ($item->find('.avarage') as $element)
-//                    {
-//                        $value = str_replace(['®', '‡', '*','™'],['', '', '', ''], $element->text);
-//                    }
-//
-//                    $base = new TechElemRating();
-//
-//                    $base->intel_processors_id = $elem->id;
-//                    $base->name = $name;
-//                    $base->value = $value;
-//
-//                      $countUrl > 0 ? $base->update() : $base->save();
-//
-//                }
+                foreach ($html->find('.knob_2') as $item)
+                {
+                    $base = new TechElemRating();
+
+                    $base->intel_processors_id = $elem->id;
+                    $base->value = $item->text;
+
+                    $countUrl > 0 ? $base->update() : $base->save();
+                }
             }
         }
     }

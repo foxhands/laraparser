@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->string('intel_processors_id');
 
-            $table->string('name');
             $table->string('value')->default('');
 
             $table->timestamps();
