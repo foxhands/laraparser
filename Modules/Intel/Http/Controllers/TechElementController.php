@@ -11,13 +11,13 @@ class TechElementController extends IntelController
 
     public function create()
     {
-        return parent::elementTechCreateOrUpdate('save');
+        return parent::elementTechCreateOrUpdate();
     }
 
 
     public function update()
     {
-        return parent::elementTechCreateOrUpdate('update');
+        return parent::elementTechCreateOrUpdate();
 
     }
 

@@ -11,7 +11,7 @@ class IntelCategoriesController extends IntelController
 
     public function create()
     {
-        return parent::categoriesCreateOrUpdate('save');
+        return parent::categoriesCreateOrUpdate();
 
     }
 
@@ -21,7 +21,7 @@ class IntelCategoriesController extends IntelController
 
     public function update()
     {
-       return parent::categoriesCreateOrUpdate('update');
+       return parent::categoriesCreateOrUpdate();
     }
 
 }

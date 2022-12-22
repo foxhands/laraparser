@@ -9,7 +9,7 @@ class IntelProcessorsController extends IntelController
      */
     public function create()
     {
-        return parent::processorsCreateOrUpdate('save');
+        return parent::processorsCreateOrUpdate();
     }
 
 
@@ -18,7 +18,7 @@ class IntelProcessorsController extends IntelController
      */
     public function update()
     {
-        return parent::processorsCreateOrUpdate('update');
+        return parent::processorsCreateOrUpdate();
     }
 
 }

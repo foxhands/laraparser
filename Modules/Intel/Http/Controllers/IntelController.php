@@ -8,25 +8,25 @@ use Modules\Intel\Entities\IntelElem;
 use Modules\Intel\Entities\IntelProcessorCategory;
 use Modules\Intel\Entities\IntelProcessors;
 use Modules\Intel\Entities\TechElem;
-use Modules\Intel\Services\ParserService;
 use voku\helper\HtmlDomParser;
 
 
 
 class IntelController extends Controller
 {
-    public function processorsCreateOrUpdate($action)
+    public function processorsCreateOrUpdate()
     {
         $baseUrl = 'https://www.intel.com';
         $baseUrlForNull = 'https://technical.city/en/cpu/';
         $countUrl = IntelProcessorCategory::all()->count();
+
         for ($i = 1; $i <= $countUrl; $i++)
         {
             $url = IntelProcessorCategory::all()->where('id', $i)->value('url');
 
             $page = (new \Modules\Intel\Services\ParserService)->curlGetPage($url);
-            if(trim($page)=='')return false;  // сайт недоступен, его мы не грузим
-            $html = HtmlDomParser::str_get_html($page);
+
+            if (trim($page) == '') return false; else $html = HtmlDomParser::str_get_html($page);  // сайт недоступен, его мы не грузим
 
             foreach ($html->find('.add-compare-wrap a') as $item)
             {
@@ -34,30 +34,28 @@ class IntelController extends Controller
                 $urlTech =  $baseUrlForNull.str_replace(' ', '-',$processor);
                 $urlIntel =  $baseUrl.$item->href;
 
-
                 $base = new IntelProcessors;
 
                 $base->name = $processor;
                 $base->url_intel = $urlIntel;
 
-                if ((new \Modules\Intel\Services\ParserService)->getUrlStatus($urlTech) == '200')
-                {
-                    $base->url_tech =  $urlTech;
-                }
+                if ((new \Modules\Intel\Services\ParserService)->getUrlStatus($urlTech) == '200') $base->url_tech =  $urlTech;
 
-                $base->$action();
+                $countUrl > 0 ? $base->save() : $base->update();
             }
         }
     }
 
-    public function categoriesCreateOrUpdate($action)
+    public function categoriesCreateOrUpdate()
     {
         $url = 'https://ark.intel.com/content/www/us/en/ark.html';
         $baseUrl = 'https://www.intel.com';
+        $countUrl = IntelProcessorCategory::all()->count();
 
         $page = (new \Modules\Intel\Services\ParserService)->curlGetPage($url);
-        if (trim($page) == '') return false;  // сайт недоступен, его мы не грузим
-        $html = HtmlDomParser::str_get_html($page);
+
+        if (trim($page) == '') return false; else $html = HtmlDomParser::str_get_html($page);  // сайт недоступен, его мы не грузим
+
         $panelLabel = [
             'PanelLabel595',
             'PanelLabel29035',
@@ -81,19 +79,22 @@ class IntelController extends Controller
                 $base->name = $processor;
                 $base->url = $baseUrl.$element->href;
 
-                $base->$action();
+                $countUrl > 0 ? $base->save() : $base->update();
             }
         }
     }
 
-    public function elementTechCreateOrUpdate($action)
+    public function elementTechCreateOrUpdate()
     {
+        $countUrl = IntelProcessors::all()->count();
         $techElem = IntelProcessors::all()->chunk(10);
+
 
         foreach ($techElem as $item) {
             foreach ($item as $elem){
                 $page = (new \Modules\Parser\Services\ParserService)->curlGetPage($elem->url_tech);
-                $html = HtmlDomParser::str_get_html($page);
+
+                if (trim($page) == '') return false; else $html = HtmlDomParser::str_get_html($page);  // сайт недоступен, его мы не грузим
 
                 foreach ($html->find('tr') as $item)
                 {
@@ -112,20 +113,22 @@ class IntelController extends Controller
                     $base->name = $name;
                     $base->value = $value;
 
-                    $base->$action();
+                    $countUrl > 0 ? $base->save() : $base->update();
                 }
             }
         }
     }
 
-    public function elementIntelCreateOrUpdate($action)
+    public function elementIntelCreateOrUpdate()
     {
+        $countUrl = IntelProcessors::all()->count();
         $intelElem = IntelProcessors::all()->chunk(10);
 
         foreach ($intelElem as $item) {
             foreach ($item as $elem){
                 $page = (new \Modules\Parser\Services\ParserService)->curlGetPage($elem->url_intel);
-                $html = HtmlDomParser::str_get_html($page);
+
+                if (trim($page) == '') return false; else $html = HtmlDomParser::str_get_html($page);  // сайт недоступен, его мы не грузим
 
                 foreach ($html->find('ul.specs-list li') as $item)
                 {
@@ -145,7 +148,7 @@ class IntelController extends Controller
                     $base->name = $label;
                     $base->value = $value;
 
-                    $base->$action();
+                    $countUrl > 0 ? $base->save() : $base->update();
                 }
             }
         }

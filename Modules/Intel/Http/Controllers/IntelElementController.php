@@ -16,7 +16,7 @@ class IntelElementController extends IntelController
     public function create()
     {
 
-        return parent::elementIntelCreateOrUpdate('save');
+        return parent::elementIntelCreateOrUpdate();
     }
 
     /**
@@ -24,7 +24,7 @@ class IntelElementController extends IntelController
      */
     public function update()
     {
-        return parent::elementIntelCreateOrUpdate('update');
+        return parent::elementIntelCreateOrUpdate();
 
     }
 
