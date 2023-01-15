@@ -84,7 +84,7 @@ return new class extends Migration
             $table->smallInteger('turbo-boost-technology')->nullable()->default(NULL);
             $table->smallInteger('idle-states')->nullable()->default(NULL);
             $table->smallInteger('clear-video-hd')->nullable()->default(NULL);
-            $table->string('sgx')->nullable()->default(NULL);
+            $table->smallInteger('sgx')->nullable()->default(NULL);
             $table->smallInteger('launch-price-msrp')->nullable()->default(NULL);
             $table->smallInteger('place-by-popularity')->nullable()->default(NULL);
             $table->smallInteger('bus-support')->nullable()->default(NULL);
