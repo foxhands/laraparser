@@ -11,7 +11,7 @@ class CreateProcessor extends Command
      *
      * @var string
      */
-    protected $signature = 'processor:create';
+    protected $signature = 'parser:processors';
 
     /**
      * The console command description.

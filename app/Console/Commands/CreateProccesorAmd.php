@@ -12,7 +12,7 @@ class CreateProccesorAmd extends Command
      *
      * @var string
      */
-    protected $signature = 'amd:create';
+    protected $signature = 'amd:processors';
 
     /**
      * The console command description.

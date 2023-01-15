@@ -24,9 +24,9 @@ return new class extends Migration
             $table->smallInteger('threads')->nullable()->default(NULL);
             $table->smallInteger('base-clock-speed')->nullable()->default(NULL);
             $table->smallInteger('boost-clock-speed')->nullable()->default(NULL);
-            $table->smallInteger('l1-cache')->nullable()->default(NULL);
-            $table->smallInteger('l2-cache')->nullable()->default(NULL);
-            $table->smallInteger('l3-cache')->nullable()->default(NULL);
+            $table->integer('l1-cache')->nullable()->default(NULL);
+            $table->integer('l2-cache')->nullable()->default(NULL);
+            $table->integer('l3-cache')->nullable()->default(NULL);
             $table->smallInteger('chip-lithography')->nullable()->default(NULL);
             $table->string('die-size')->nullable()->default(NULL);
             $table->smallInteger('maximum-core-temperature')->nullable()->default(NULL);

@@ -11,7 +11,7 @@ class CreateElement extends Command
      *
      * @var string
      */
-    protected $signature = 'processor:element';
+    protected $signature = 'parser:element';
 
     /**
      * The console command description.
