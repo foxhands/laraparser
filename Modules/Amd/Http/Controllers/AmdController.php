@@ -141,7 +141,7 @@ class AmdController extends Controller
 //                dd($collection);
                     try
                     {
-                        (new \Modules\Amd\Entities\AmdElement)->addElement($elem->id, $collection);
+                        (new \Modules\Amd\Entities\AmdElement)->addElement($elem->id, $elem->name,$collection);
                         echo $elem->id.' '.$elem->name.PHP_EOL;
                     }
                     catch(Exception $e)

@@ -234,12 +234,18 @@ class IntelController extends Controller
                 }
                 try
                 {
-                    (new \Modules\Intel\Entities\IntelElem)->addProcessor($elem->id, $collection);
+                    (new \Modules\Intel\Entities\IntelElem)->addElement($elem->id, $elem->name, $collection);
+                    echo $elem->id.' '.$elem->name.PHP_EOL;
+
                 }
                 catch(Exception $e)
                 {
-                    if ($e->getCode() == '42S22') $error = 'Column not found';
-                    echo $elem->name.' Has error '.$error.PHP_EOL;
+                    echo $elem->name.' Has error '.$e->getMessage().PHP_EOL;
+
+                    if ($e->getCode() == '42S22') echo 'Column not found';
+                    if ($e->getCode() == '22003') echo 'Integer error';
+                    if ($e->getCode() == 'HY000') echo 'Column does not have default value';
+
                     continue;
                 }
             }

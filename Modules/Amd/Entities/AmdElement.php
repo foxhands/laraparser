@@ -10,11 +10,12 @@ class AmdElement extends Model
 {
     protected $table = 'amd_elements';
 
-    public function addElement($id, $items)
+    public function addElement($id, $name, $items)
     {
         $base = new AmdElement;
 
-        $base->processor_id = $id;
+        $base->amd_processor_id = $id;
+        $base->amd_processors_name = $name;
 
         foreach ($items as $label => $value) {
             $base->$label = $value;

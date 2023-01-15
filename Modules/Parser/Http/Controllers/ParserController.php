@@ -206,7 +206,7 @@ class ParserController extends Controller
                 }
                 try
                 {
-                    (new \Modules\Parser\Entities\Element)->addProcessor($elem->id, $collection);
+                    (new \Modules\Parser\Entities\Element)->addElement($elem->id, $elem->name, $collection);
                     echo $elem->id.' '.$elem->name.PHP_EOL;
 
                 }

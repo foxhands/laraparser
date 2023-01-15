@@ -21,11 +21,12 @@ class IntelElem extends Model
      * @throws \Throwable
      */
 
-    public function addProcessor($id, $items)
+    public function addElement($id, $name, $items)
     {
         $base = new IntelElem;
 
-        $base->intel_processors_id = $id;
+        $base->intel_processor_id = $id;
+        $base->intel_processor_name = $name;
 
         foreach ($items as $key => $value) {
             $text = Str::slug($key);

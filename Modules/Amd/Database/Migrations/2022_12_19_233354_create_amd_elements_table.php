@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('amd_elements', function (Blueprint $table) {
             $table->id();
-            $table->integer('processor_id');
+            $table->integer('amd_processor_id');
+            $table->foreignUlid('amd_processor_name');
             $table->string('platform')->nullable()->default(NULL);
             $table->string('product-family')->nullable()->default(NULL);
             $table->string('product-line')->nullable()->default(NULL);

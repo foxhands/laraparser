@@ -9,11 +9,13 @@ class Element extends Model
 {
     protected $table = 'elements';
 
-    public function addProcessor($id, $items)
+    public function addElement($id, $name,$items)
     {
         $base = new Element;
 
         $base->processor_id = $id;
+        $base->processor_name = $name;
+
 
         foreach ($items as $key => $value) {
             $text = Str::slug($key);

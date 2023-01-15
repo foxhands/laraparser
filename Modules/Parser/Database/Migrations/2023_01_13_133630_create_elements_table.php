@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('elements', function (Blueprint $table) {
             $table->id();
             $table->smallInteger('processor_id')->nullable()->default(NULL);
+            $table->foreignUlid('processor_name');
             $table->string('place-in-performance-rating')->nullable()->default(NULL);
             $table->string('market-segment')->nullable()->default(NULL);
             $table->string('architecture-codename')->nullable()->default(NULL);
