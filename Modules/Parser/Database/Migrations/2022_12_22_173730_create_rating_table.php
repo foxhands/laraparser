@@ -13,13 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('intel_tech_elements', function (Blueprint $table) {
+        Schema::create('user_rating', function (Blueprint $table) {
             $table->id();
-            $table->string('intel_processors_id');
-
-            $table->string('name');
+            $table->string('processors_id');
             $table->string('value')->default('');
-
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('intel_tech_elements');
+        Schema::dropIfExists('intel_tech_user_rating');
     }
 };

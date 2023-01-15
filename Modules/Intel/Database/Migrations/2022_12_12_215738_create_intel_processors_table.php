@@ -16,8 +16,7 @@ return new class extends Migration
         Schema::create('intel_processors', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('url_intel');
-            $table->string('url_tech')->default('');
+            $table->string('url');
             $table->string('active')->default('1');
             $table->timestamps();
         });

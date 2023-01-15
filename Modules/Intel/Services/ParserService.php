@@ -33,8 +33,7 @@ class ParserService {
         // Создаём дескриптор cURL
         $ch = curl_init($url);
 
-        if($ch === false)
-            return false;
+        if($ch === false) return false;
 
         curl_setopt($ch, CURLOPT_HEADER         ,true);    // we want headers
         curl_setopt($ch, CURLOPT_NOBODY         ,true);    // don't need body

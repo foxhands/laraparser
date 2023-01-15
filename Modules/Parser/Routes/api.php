@@ -14,7 +14,3 @@ use Modules\Parser\Http\Controllers\ParserController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::prefix('parser')->group(function() {
-    Route::get('/intel-{nameOfAction}', [ParserController::class, 'parseElementIntel']);
-});

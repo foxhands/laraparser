@@ -1,11 +1,9 @@
 <?php
 
-namespace Modules\Parser\Services;
+namespace Modules\Amd\Services;
 
-
-use Illuminate\Support\Str;
-
-class ParserService {
+class ParserService
+{
 
     public function curlGetPage($url, $referer = 'https://google.com/'): bool|string
     {
@@ -30,4 +28,3 @@ class ParserService {
 
     }
 }
-
